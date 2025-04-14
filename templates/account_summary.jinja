@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Account Summary</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f2f2f2;
+        }
+
+        /* Bottom nav bar */
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0 20px 0;
+            border-top: 1px solid #ccc;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: white;
+        }
+
+        .nav-item {
+            width: 60px;
+            text-align: center;
+        }
+
+        .nav-item i {
+            font-size: 22px;
+        }
+
+        .nav-item span {
+            display: block;
+            font-size: 12px;
+            margin-top: 4px;
+            color: #333;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        a:hover {
+            color: #2ecc71;
+        }
+
+        .container {
+            padding: 20px;
+            margin-bottom: 60px;
+        }
+
+        .balance-box {
+            background-color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .move-money {
+            background-color: black;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .transactions {
+            background-color: white;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .transaction {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+        }
+
+        .transaction:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+        <h2>Account Summary</h2>
+
+        {% for account in accounts %}
+        <div class="balance-box">
+            <h3>Account {{ account.number }}</h3>
+            <p>Balance: £{{ '%.2f' | format(account.balance) }}</p>
+        </div>
+        {% endfor %}
+
+
+    <form action="{{ url_for('payments') }}">
+        <button class="move-money">Move Money</button>
+    </form>
+
+    <div class="transactions">
+        <h3>Transactions</h3>
+        {% if transactions %}
+            {% for t in transactions %}
+                <div class="transaction">
+                    <strong>{{ t.date }}</strong>: {{ t.description }} - £{{ t.amount }}
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No transactions found.</p>
+        {% endif %}
+    </div>
+</div>
+<div class="bottom-nav">
+        <div class="nav-item">
+            <a href="{{ url_for('home') }}">
+                <i class="fa-solid fa-house"></i>
+                <span>Home</span>
+            </a>
+        </div>
+        <div class="nav-item">
+            <a href="{{ url_for('payments') }}">
+                <i class="fa-solid fa-money-bill-transfer"></i>
+                <span>Payments</span>
+            </a>
+        </div>
+        <div class="nav-item">
+            <a href="{{ url_for('apply') }}">
+                <i class="fa-solid fa-file-contract"></i>
+                <span>Apply</span>
+            </a>
+        </div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/9def8f9eb1.js" crossorigin="anonymous"></script>
+</body>
+</html>

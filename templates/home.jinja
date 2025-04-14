@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f5f5f5;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding-bottom: 80px; /* Space for bottom nav */
+        }
+
+        /* Logo in top-right */
+        .logo {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 80px;
+            height: auto;
+        }
+
+        /* Main content wrapper */
+        .main-content {
+            width: 90%;
+            max-width: 500px;
+        }
+
+        h2 {
+            text-align: left;
+            margin-bottom: 10px;
+        }
+
+        /* Account card styling */
+        .account-card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 10px;
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background: white;
+            text-align: left;
+        }
+
+        .balance {
+            font-weight: bold;
+            color: #2ecc71;
+            font-size: 1.2em;
+        }
+
+        .account-card p:not(.balance) {
+            color: #666;
+            margin: 8px 0;
+        }
+
+        /* Bottom nav bar */
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0 20px 0;
+            border-top: 1px solid #ccc;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: white;
+        }
+
+        .nav-item {
+            width: 60px;
+            text-align: center;
+        }
+
+        .nav-item i {
+            font-size: 22px;
+        }
+
+        .nav-item span {
+            display: block;
+            font-size: 12px;
+            margin-top: 4px;
+            color: #333;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        a:hover {
+            color: #2ecc71;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Logo -->
+    <div class="logo">
+        <img src="https://i.postimg.cc/sXrY4k52/Loop-Logo-Animated.gif" alt="Logo" style="width: 100%;">
+    </div>
+
+    <!-- Main content -->
+    <div class="main-content">
+        <h2>Accounts</h2>
+
+        {% for account in accounts %}
+        <div class="account-card">
+            <h3>{{ account.name }}</h3>
+            <p class="balance">£{{ account.balance }}</p>
+            <p>Account Number: {{ account.number }} | Sort code: {{ account.code }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <div class="nav-item">
+            <a href="{{ url_for('home') }}">
+                <i class="fa-solid fa-house"></i>
+                <span>Home</span>
+            </a>
+        </div>
+        <div class="nav-item">
+            <a href="{{ url_for('payments') }}">
+                <i class="fa-solid fa-money-bill-transfer"></i>
+                <span>Payments</span>
+            </a>
+        </div>
+        <div class="nav-item">
+            <a href="{{ url_for('apply') }}">
+                <i class="fa-solid fa-file-contract"></i>
+                <span>Apply</span>
+            </a>
+        </div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/9def8f9eb1.js" crossorigin="anonymous"></script>
+</body>
+</html>
+
+

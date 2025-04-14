@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Credit Card Application</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f4f4f4; }
+        .header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 20px; }
+        .header h1 { font-size: 1.8em; }
+        .logo { width: 50px; height: 50px; cursor: pointer; border-radius: 10px; }
+        .section { background-color: white; border-radius: 12px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); padding: 20px; margin-bottom: 20px; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Apply for a Credit Card</h1>
+        <a href="{{ url_for('home') }}">
+            <img src="https://i.postimg.cc/sXrY4k52/Loop-Logo-Animated.gif" alt="Logo" class="logo">
+        </a>
+    </div>
+
+    <div class="section">
+        <h2>Available Credit Cards</h2>
+        <ul>
+            {% for card in cards %}
+                <li>{{ card }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Approval Results</h2>
+        <ul>
+            {% for a in approvals %}
+                <li>{{ a }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Diagnostics</h2>
+        <ul>
+            {% for d in diagnostics %}
+                <li>{{ d }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
+
