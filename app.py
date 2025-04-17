@@ -228,8 +228,6 @@ def add_payee():
 def apply():
     return render_template("apply.jinja")
 
-import random
-
 @app.route('/apply/loan')
 def apply_loan():
     loan_options = [
